@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: http://26.137.230.238:3000
+          predicates:
+            - Path=/api/auth/**
+        - id: event-management-service
+          uri: http://26.137.230.238:3001
+          predicates:
+            - Path=/api/evento/**
+      globals:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://26.137.230.238:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "http://26.137.230.238"
